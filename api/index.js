@@ -25,7 +25,7 @@ const __dirname = path.resolve();
 const app = express(); 
 
 app.use(cors({
-  origin: ["https://mern-blog-three-gamma.vercel.app"],
+  origin: ["mern-stack-blog-post-server-krbiam9e8-james-kevins-projects.vercel.app"],
   methods:["POST","GET","PUT","PATCH","DELETE","OPTION","HEAD"],
   credentials: true
 }));
