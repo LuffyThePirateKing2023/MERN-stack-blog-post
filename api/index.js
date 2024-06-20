@@ -9,30 +9,29 @@ import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
-mongoose
-  .connect(process.env.MONGO_URL)
+mongoose.connect(process.env.MONGO_URL)
   .then(() => {
     console.log('MongoDb is connected');
   })
   .catch((err) => {
-    console.log(err);
+    console.error('MongoDB connection error:', err);
   });
 
-
-const app = express(); 
-
+const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000!');
-});
-
+// Define your API routes
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
+
+
+app.get('/', (req, res) => {
+  res.send('Welcome to the back-end');
+});
 
 
 app.use((err, req, res, next) => {
@@ -43,4 +42,9 @@ app.use((err, req, res, next) => {
     statusCode,
     message,
   });
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
