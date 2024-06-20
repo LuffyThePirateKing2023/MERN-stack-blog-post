@@ -22,7 +22,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  origin: ["https://mern-stack-blog-post.vercel.app"],
+  methods: ["GET","POST", "PUT", "UPDATE", "DELETE"],
+  credentials: true
+}));
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
