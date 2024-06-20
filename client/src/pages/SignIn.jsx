@@ -31,6 +31,13 @@ export default function SignIn() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
+      
+      //handle http request
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`HTTP error ${res.status}: ${errorText}`);
+      }
+
       const data = await res.json();
       if (data.success === false) {
         dispatch(signInFailure(data.message));
