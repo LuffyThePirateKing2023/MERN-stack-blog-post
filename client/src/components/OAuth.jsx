@@ -16,7 +16,7 @@ export default function OAuth() {
         provider.setCustomParameters({ prompt: 'select_account' })
         try {
             const resultsFromGoogle = await signInWithPopup(auth, provider)
-            const res = await fetch(`/api/auth/google`, {
+            const res = await fetch("https://mern-stack-blog-post-server.vercel.app/api/auth/google", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

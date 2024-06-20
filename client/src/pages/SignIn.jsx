@@ -26,12 +26,12 @@ export default function SignIn() {
     }
     try {
       dispatch(signInStart());
-      const res = await fetch(`/api/auth/signin`, {
+      const res = await fetch("https://mern-stack-blog-post-server.vercel.app/api/auth/signin", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      
+
       //handle http request
       if (!res.ok) {
         const errorText = await res.text();
