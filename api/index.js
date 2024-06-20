@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.route.js';
 import postRoutes from './routes/post.route.js';
 import commentRoutes from './routes/comment.route.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors'
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
