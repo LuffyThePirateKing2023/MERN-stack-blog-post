@@ -111,12 +111,11 @@ export default function DashProfile() {
     }
     try {
       dispatch(updateStart());
-      const token = import.meta.env.Vercel_access_token;
       const res = await fetch(`https://mern-stack-blog-post-server.vercel.app/api/user/update/${currentUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer${token}`
+          'Authorization': `Bearer ${import.meta.env.Vercel_access_token}`
         },
         body: JSON.stringify(formData),
       });
