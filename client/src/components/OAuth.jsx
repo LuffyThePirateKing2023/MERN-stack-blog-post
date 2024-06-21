@@ -14,10 +14,13 @@ export default function OAuth() {
         const provider = new GoogleAuthProvider()
         provider.setCustomParameters({ prompt: 'select_account' })
         try {
-            const resultsFromGoogle = await signInWithPopup(auth, provider)
+            const resultsFromGoogle = await signInWithPopup(auth, provider);
+
+            const idToken = await resultsFromGoogle.user.getIdToken()
             const res = await fetch("https://mern-stack-blog-post-server.vercel.app/api/auth/google", {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json',
+                           'Authorization': `Bearer ${idToken}`},
                 body: JSON.stringify({
                     name: resultsFromGoogle.user.displayName,
                     email: resultsFromGoogle.user.email,

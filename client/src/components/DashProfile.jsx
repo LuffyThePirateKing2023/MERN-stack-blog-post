@@ -111,10 +111,12 @@ export default function DashProfile() {
     }
     try {
       dispatch(updateStart());
+      const token = import.meta.env.Vercel_access_token;
       const res = await fetch(`https://mern-stack-blog-post-server.vercel.app/api/user/update/${currentUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer${token}`
         },
         body: JSON.stringify(formData),
       });
@@ -131,8 +133,10 @@ export default function DashProfile() {
       setUpdateUserError(error.message);
     }
   };
+
   const handleDeleteUser = async () => {
     setShowModal(false);
+    
     try {
       dispatch(deleteUserStart());
       const res = await fetch(`https://mern-stack-blog-post-server.vercel.app/api/user/delete/${currentUser._id}`, {

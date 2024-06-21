@@ -26,7 +26,6 @@ export default function UpdatePost() {
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
-    console.log('postId', postId);
     try {
       const fetchPost = async () => {
         const res = await fetch(`https://mern-stack-blog-post-server.vercel.app/api/post/getposts?postId=${postId}`);
@@ -92,9 +91,6 @@ export default function UpdatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log('formData', formData);
-    console.log('currentUser', currentUser);
 
     try {
       const res = await fetch(`https://mern-stack-blog-post-server.vercel.app/api/post/updatepost/${formData._id}/${currentUser._id}`, {
